@@ -46,9 +46,11 @@ for l in languages:
 		translated = ""
 		try:
 			translated = translator.translate(value, src=srcLang, dest=l).text
-		except:
-			print("\33[1;31merror translating: \33[1;33m{}\33[0m".format(value))
+			sys.stdout.write('.')
+			sys.stdout.flush()
+		except Exception, e:
+			print("\33[1;31merror translating: \33[1;33m{}\33[1;31m {}\33[0m".format(value, e))
 		line = "\"{}\" = \"{}\";\n\n".format(stringRef['key'], translated)
 		stringsFile.write(line)
-		time.sleep(0.5) # try not to flood google translate
+		time.sleep(1.5) # try not to flood google translate
 	stringsFile.close() 
